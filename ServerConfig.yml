@@ -1,0 +1,9 @@
+ServerPort: 8080
+ServerHomePageBuildDir: "/home/sreekar339/frontend/AppsDomainHomePage/static"
+
+Apps:
+- AppHomePage: "/YeezyMediaPlayer/"
+  AppBuildDir: "/home/sreekar339/frontend/CRA/YeezyMediaPlayer/build"
+
+- AppHomePage: "/Pikachu/"
+  AppBuildDir: "/home/sreekar339/frontend/CRA/Pikachu/build"
