@@ -12,8 +12,8 @@ func greet(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello World! %s", time.Now())
 }
 
-var appBuildDirPtr = flag.String("dir", "static", "file directory location")
-var appLocationPtr = flag.String("loc", "/StaticApp/", "location of app under the domain")
+var appBuildDirPtr = flag.String("buildDir", "static", "file directory location")
+var appLocationPtr = flag.String("hostedAt", "/StaticApp/", "location of app under the domain")
 
 func main() {
 	flag.Parse()
