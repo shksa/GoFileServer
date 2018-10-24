@@ -26,7 +26,7 @@ func main() {
 	http.Handle(appLocation, http.StripPrefix(appLocation, fsHandler))
 
 	log.Println("Listening...")
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe("localhost:8080", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
