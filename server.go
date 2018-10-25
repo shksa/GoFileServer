@@ -72,9 +72,9 @@ func main() {
 	http.HandleFunc("/greet", greet)
 
 	for _, appConfig := range serverConfig.Apps {
-		appHandler := http.FileServer(http.Dir(appConfig.AppBuildDir))
-		appHandler = http.StripPrefix(appConfig.AppHomePage, appHandler)
-		http.Handle(appConfig.AppHomePage, appHandler)
+		appFilesHandler := http.FileServer(http.Dir(appConfig.AppBuildDir))
+		appFilesHandler = http.StripPrefix(appConfig.AppHomePage, appFilesHandler)
+		http.Handle(appConfig.AppHomePage, appFilesHandler)
 	}
 
 	TCPNetworkAddress := fmt.Sprintf("localhost:%s", serverConfig.ServerPort)
