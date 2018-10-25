@@ -1,9 +1,24 @@
-ServerPort: 8080
-ServerHomePageBuildDir: "/home/sreekar339/frontend/AppsDomainHomePage/static"
+Production:
+  ServerPort: 8080
+  Apps:
+  - AppHomePage: /
+    AppBuildDir: /home/sreekar339/frontend/AppsDomainHomePage/static
+    
+  - AppHomePage: /YeezyMediaPlayer/
+    AppBuildDir: /home/sreekar339/frontend/CRA/YeezyMediaPlayer/build
 
-Apps:
-- AppHomePage: "/YeezyMediaPlayer/"
-  AppBuildDir: "/home/sreekar339/frontend/CRA/YeezyMediaPlayer/build"
+  - AppHomePage: /Pikachu/
+    AppBuildDir: /home/sreekar339/frontend/CRA/Pikachu/build"
 
-- AppHomePage: "/Pikachu/"
-  AppBuildDir: "/home/sreekar339/frontend/CRA/Pikachu/build"
+Development:
+  ServerPort: 8080
+  Apps:
+  - AppHomePage: /
+    AppBuildDir: ./static
+
+  - AppHomePage: /YeezyMediaPlayer/
+    AppBuildDir: /Users/sreekarnimbalkar/hobby_projs/media-player/build
+
+  - AppHomePage: /Pikachu/
+    AppBuildDir: /Users/sreekarnimbalkar/pikachu/pikachu_frontend_web/build
+  

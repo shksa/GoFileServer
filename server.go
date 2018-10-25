@@ -20,16 +20,16 @@ type AppConfig struct {
 	AppBuildDir string
 }
 
-// ServerConfig is the config for this file server
+// ServerConfig defines the config. of the server
 type ServerConfig struct {
-	ServerPort             string
-	ServerHomePageBuildDir string
-	Apps                   []AppConfig
+	ServerPort string
+	Apps       []AppConfig
 }
 
 var serverConfig ServerConfig
 
 func readConfig() {
+	viper.SetDefault("ENV", "dev")
 	viper.SetConfigName("ServerConfig")
 	viper.AddConfigPath(".")
 	viper.AutomaticEnv() // ensures that Viper will read from environment variables as well.
@@ -40,10 +40,25 @@ func readConfig() {
 	}
 
 	// Confirm which config file is used
-	fmt.Printf("Using config: %s\n", viper.ConfigFileUsed())
+	fmt.Printf("\n\nUsing config: %s\n", viper.ConfigFileUsed())
 
-	if err := viper.Unmarshal(&serverConfig); err != nil {
-		log.Fatalf("unable to decode into struct, %v", err)
+	serverEnvironment := viper.GetString("ENV") // cannot use "env" as the environment variable name in the exec command.
+
+	fmt.Printf("\nUsing environment: %q\n", serverEnvironment)
+
+	switch serverEnvironment {
+	case "dev", "DEV", "development", "DEVELOPMENT":
+		if err := viper.UnmarshalKey("Development", &serverConfig); err != nil {
+			log.Fatal(err)
+		}
+
+	case "prod", "PROD", "production", "PRODUCTION":
+		if err := viper.UnmarshalKey("Production", &serverConfig); err != nil {
+			log.Fatal(err)
+		}
+
+	default:
+		fmt.Println("This case should not be matched")
 	}
 }
 
@@ -56,16 +71,15 @@ func main() {
 
 	http.HandleFunc("/greet", greet)
 
-	ServerHomePageFSHandler := http.FileServer(http.Dir(serverConfig.ServerHomePageBuildDir))
-	http.Handle("/", ServerHomePageFSHandler)
-
-	for _, AppConfig := range serverConfig.Apps {
-		AppBuildFSHandler := http.FileServer(http.Dir(AppConfig.AppBuildDir))
-		http.Handle(AppConfig.AppHomePage, http.StripPrefix(AppConfig.AppHomePage, AppBuildFSHandler))
+	for _, appConfig := range serverConfig.Apps {
+		appHandler := http.FileServer(http.Dir(appConfig.AppBuildDir))
+		appHandler = http.StripPrefix(appConfig.AppHomePage, appHandler)
+		http.Handle(appConfig.AppHomePage, appHandler)
 	}
 
+	TCPNetworkAddress := fmt.Sprintf("localhost:%s", serverConfig.ServerPort)
 	log.Println("Listening...")
-	err := http.ListenAndServe("localhost:8080", nil)
+	err := http.ListenAndServe(TCPNetworkAddress, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
