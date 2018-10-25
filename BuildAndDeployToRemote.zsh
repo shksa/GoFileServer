@@ -1,5 +1,5 @@
 #!/bash/zsh
-echo "deployToRemote script started running\n"
+echo "\ndeployToRemote script started running\n"
 
 # rm lol.lol \
 # \
@@ -25,3 +25,5 @@ sudo systemctl start GoFileServer &&
 echo "9"
 ' \
 && echo "10"
+
+echo "\ndeployToRemote script ended running\n"
