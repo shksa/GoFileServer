@@ -8,7 +8,7 @@ Production:
     AppBuildDir: /home/sreekar339/frontend/CRA/YeezyMediaPlayer/build
 
   - AppHomePage: /Pikachu/
-    AppBuildDir: /home/sreekar339/frontend/CRA/Pikachu/build"
+    AppBuildDir: /home/sreekar339/frontend/CRA/Pikachu/build
 
 Development:
   ServerPort: 8080

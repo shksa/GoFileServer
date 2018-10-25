@@ -5,7 +5,8 @@ After=network.target
 [Service]
 User=sreekar339
 WorkingDirectory=/home/sreekar339/backend/go/fileServer
-ExecStart=/home/sreekar339/backend/go/fileServer/GoFileServer -buildDir=/home/sreekar339/frontend/CRA/YeezyMediaPlayer/build -hostedAt=/YeezyMediaPlayer/
+Environment="ENV=prod"
+ExecStart=/home/sreekar339/backend/go/fileServer/GoFileServer
 
 [Install]
 WantedBy=multi-user.target
