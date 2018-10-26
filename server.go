@@ -79,8 +79,15 @@ func main() {
 
 	TCPNetworkAddress := fmt.Sprintf("localhost:%s", serverConfig.ServerPort)
 	log.Println("Listening...")
-	err := http.ListenAndServe(TCPNetworkAddress, nil)
+	err := http.ListenAndServe(TCPNetworkAddress, logRequest(http.DefaultServeMux))
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func logRequest(handler http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Printf("%s %s %s\n", r.RemoteAddr, r.Method, r.URL)
+		handler.ServeHTTP(w, r)
+	})
 }

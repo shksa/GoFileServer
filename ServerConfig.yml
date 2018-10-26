@@ -4,10 +4,10 @@ Production:
   - AppHomePage: /
     AppBuildDir: /home/sreekar339/frontend/AppsDomainHomePage/static
     
-  - AppHomePage: /YeezyMediaPlayer
+  - AppHomePage: /YeezyMediaPlayer/
     AppBuildDir: /home/sreekar339/frontend/CRA/YeezyMediaPlayer/build
 
-  - AppHomePage: /Pikachu
+  - AppHomePage: /Pikachu/
     AppBuildDir: /home/sreekar339/frontend/CRA/Pikachu/build
 
 Development:
@@ -16,9 +16,8 @@ Development:
   - AppHomePage: /
     AppBuildDir: ./static
 
-  - AppHomePage: /YeezyMediaPlayer
+  - AppHomePage: /YeezyMediaPlayer/
     AppBuildDir: /Users/sreekarnimbalkar/hobby_projs/media-player/build
 
-  - AppHomePage: /Pikachu
-    AppBuildDir: /Users/sreekarnimbalkar/pikachu/pikachu_frontend_web/build
-  
+  - AppHomePage: /Pikachu/
+    AppBuildDir: /Users/sreekarnimbalkar/hobby_projs/pikachu/pikachu_frontend_web/build
